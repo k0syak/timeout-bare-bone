@@ -3,20 +3,20 @@ const timeOut = require('../timeout');
 
 
 describe( 'timeOut', async function() {
-    await it(' time in timeout less 100', () => {
+    await it(' time in timeout less 100', (done) => {
 
         let time = timeOut.timeout(timeOut.sleep(100), 20);
 
-        time.then( result =>  assert.equal( result ));
+        time.catch( result => { assert.equal( result ); done()});
 
-        //assert.equal( timeOut.timeout(timeOut.sleep(100), 20).then(() => 'fail') );
+        //assert.equal( timeOut.timeout(timeOut.sleep(100), 20).catch(() => 'fail') );
     });
 
-    await it('time in timeout more 100', () => {
+    await it('time in timeout more 100', (done) => {
 
         let time = timeOut.timeout(timeOut.sleep(100), 200);
 
-        time.then( result =>  assert.equal( result ));
+        time.then( result => { assert.equal( result ); done()});
 
         //assert.equal( timeOut.timeout(timeOut.sleep(100), 200).then(() => 'ok') );
     });
