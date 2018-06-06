@@ -8,7 +8,8 @@ function timeout(p, t) {
   const failure = new Promise( (resolve, reject) => {
     setTimeout(() => reject('timed out'), t)
   });
-  return Promise.race([failure, p]);
+  return Promise.race([failure, p])
+      .catch( error => new Error(error));
 }
 
 function sleep(interval) {
